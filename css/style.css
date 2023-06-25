@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --red: rgb(186, 73, 73);
+    --green: rgb(73, 186, 73);
+}
+
+.container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.bg-red{
+    background-color: var(--red);
+}
+
+.bg-green{
+    background-color: var(--green);
+}
+
+.text-red{
+    color: var(--red);
+}
+
+.text-green{
+    color: var(--green);
+}
+
+.timer-container {
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    position: absolute;
+    top: 10%;
+    width: 40vw;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px 110px;
+}
+
+#timer-title {
+    font-size: 8rem;
+    margin: 20px 0px;
+}
+
+
+.btn-pressed{
+    border: none;
+    position: relative;
+    top: 4px;
+}
+
+.btn-not-pressed{
+    border: none;
+    border-bottom: 4px solid rgb(151, 151, 151);
+}
+
+#pause {
+    outline: none;
+    cursor: pointer;
+    height: 60px;
+    width: 200px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.fa-solid.fa-rotate {
+    margin: 0px 10px;
+}
+
+#reset{
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+#period{
+    position: relative;
+    top: 20px;
+    margin: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}

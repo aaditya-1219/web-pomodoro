@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Timer | Pomodoro App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/98fdc47a54.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container bg-red" id="container">
+        <div class="timer-container">
+            <h2 id="timer-title">
+                00:00
+            </h2>
+            <div class="action-buttons">
+                <button id="pause" class="btn-not-pressed text-red" onclick="handleClick()">START</button>
+                <i class="fa-solid fa-rotate" id="reset" onclick="resetTimer()"></i>
+            </div>
+            <div id="period">Get to Work!</div>
+        </div>
+    </div>
+</body>
+</html>
