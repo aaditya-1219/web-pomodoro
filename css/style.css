@@ -10,7 +10,7 @@
 
 :root {
     --red: rgb(186, 73, 73);
-    --green: rgb(73, 186, 73);
+    --purple: rgb(144, 73, 186);
 }
 
 .container{
@@ -20,20 +20,47 @@
     justify-content: center;
 }
 
-.bg-red{
-    background-color: var(--red);
+.navbar{
+    width: 100%;
 }
 
-.bg-green{
-    background-color: var(--green);
+.navbar ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.navbar ul li {
+    list-style: none;
+    padding: 5px 8px;
+    border-radius: 4px;
+    border: transparent;
+}
+
+.chosenScreen{
+    background-color: rgba(0,0,0,0.2);
+}
+
+.navbar ul li a{
+    cursor: pointer;
+}
+
+.bg-red{
+    background-color: var(--red);
+    transition: all 0.2s linear;
+}
+
+.bg-purple{
+    background-color: var(--purple);
+    transition: all 0.2s linear;
 }
 
 .text-red{
     color: var(--red);
 }
 
-.text-green{
-    color: var(--green);
+.text-purple{
+    color: var(--purple);
 }
 
 .timer-container {
@@ -50,7 +77,7 @@
 }
 
 #timer-title {
-    font-size: 8rem;
+    font-size: 7rem;
     margin: 20px 0px;
 }
 
