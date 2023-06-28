@@ -6,7 +6,7 @@
 function minToSec(min) {
     return min * 60
 }
-let sessionTime = minToSec(0.05)
+let sessionTime = minToSec(0.1)
 let breakTime = minToSec(0.05)
 let currentSessionTime = sessionTime
 let currentBreakTime = breakTime
@@ -21,23 +21,38 @@ const container = document.getElementById('container')
 const period = document.getElementById('period')
 
 const workTab = document.getElementById('workTab')
-const shortBreakTab = document.getElementById('shortBreakTab')
-let currentScreen = "work"
-workTab.classList.add('chosenScreen')
+const breakTab = document.getElementById('breakTab')
+const sessionCounterElement = document.getElementById('sessionCounter')
+const tabs = [workTab, breakTab]
+let currentTab = workTab
+workTab.classList.add('chosenTab')
+let sessionCounter = 0
 
+tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        switch (e.target) {
+            case workTab:
+                resetTimer()
+                workScreen()
+                break
+            case breakTab:
+                resetTimer()
+                breakScreen()
+                break
+        }
+    })
+})
 
 function handleClick() {
     isRunning = !isRunning
     if (isRunning) {  // run the timer
         pauseBtn.innerHTML = "PAUSE"
         pressButton()
-        // if (work) { startWork() }
-        // else { startBreak() }
-        switch(currentScreen){
-            case "work":
+        switch (currentTab) {
+            case workTab:
                 startWork()
                 break
-            case "shortBreak":
+            case breakTab:
                 startBreak()
                 break
         }
@@ -55,9 +70,10 @@ function startWork() {
         if (currentSessionTime == 0) {
             isRunning = false
             unpressButton()
-            currentScreen = "shortBreak"
+            currentTab = breakTab
             breakScreen()
             clearInterval(timer)
+            sessionCounterElement.innerHTML = "Sessions Completed - " + (++sessionCounter)
         }
         else {
             currentSessionTime--
@@ -66,7 +82,36 @@ function startWork() {
     }, 1000);
 }
 
+function startBreak() {
+    timer = setInterval(() => {
+        if (currentBreakTime == 0) {
+            isRunning = false
+            currentTab = workTab
+            unpressButton()
+            workScreen()
+            resetTimer()
+        }
+        else {
+            currentBreakTime--
+            timerTitle.innerHTML = formatTime(currentBreakTime)
+        }
+    }, 1000);
+}
+
+function removeSelectionAll() {
+    tabs.forEach(tab => {
+        tab.classList.remove('chosenTab')
+    })
+}
+
+function chooseTab(tab) {
+    removeSelectionAll()
+    tab.classList.add('chosenTab')
+    currentTab = tab
+}
+
 function breakScreen() {
+    chooseTab(breakTab)
     redToPurple()
     period.innerHTML = "Time for a Break!"
     timerTitle.innerHTML = formatTime(currentBreakTime)
@@ -74,24 +119,11 @@ function breakScreen() {
 }
 
 function workScreen() {
+    chooseTab(workTab)
     purpleToRed()
     period.innerHTML = "Get to Work!"
     timerTitle.innerHTML = formatTime(currentSessionTime)
     pauseBtn.innerHTML = "START"
-}
-
-function startBreak() {
-    timer = setInterval(() => {
-        if (currentBreakTime == 0) {
-            currentScreen = "work"
-            workScreen()
-            resetTimer()            
-        }
-        else {
-            currentBreakTime--
-            timerTitle.innerHTML = formatTime(currentBreakTime)
-        }
-    }, 1000);
 }
 
 function resetTimer() {
@@ -103,11 +135,11 @@ function resetTimer() {
     clearInterval(timer)
     currentSessionTime = sessionTime;
     currentBreakTime = breakTime;
-    switch(currentScreen){
-        case "work":
+    switch (currentTab) {
+        case workTab:
             timerTitle.innerHTML = formatTime(currentSessionTime)
             break
-        case "shortBreak":
+        case breakTab:
             timerTitle.innerHTML = formatTime(currentBreakTime)
             break
     }

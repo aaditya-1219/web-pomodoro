@@ -31,18 +31,20 @@
 }
 
 .navbar ul li {
+    cursor: pointer;
     list-style: none;
     padding: 5px 8px;
     border-radius: 4px;
     border: transparent;
 }
 
-.chosenScreen{
+.chosenTab{
     background-color: rgba(0,0,0,0.2);
+    transition: all 0.2s linear;
 }
 
 .navbar ul li a{
-    cursor: pointer;
+    pointer-events: none;
 }
 
 .bg-red{
@@ -91,6 +93,10 @@
 .btn-not-pressed{
     border: none;
     border-bottom: 4px solid rgb(151, 151, 151);
+}
+
+#sessionCounter{
+    margin-top: 20px;
 }
 
 #pause {
