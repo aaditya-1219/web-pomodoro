@@ -1,15 +1,17 @@
 // Periods
 // work
 // shortBreak
-// longBreak
+// longBreak - after every 4 work sessions
 
 function minToSec(min) {
     return min * 60
 }
-let sessionTime = minToSec(0.1)
+let sessionTime = minToSec(0.05)
 let breakTime = minToSec(0.05)
+let longBreakTime = minToSec(0.05)
 let currentSessionTime = sessionTime
 let currentBreakTime = breakTime
+let currentLongBreakTime = longBreakTime
 let isRunning = false
 const clickSound = new Audio('../sound/click.mp3')
 let timer
@@ -22,8 +24,11 @@ const period = document.getElementById('period')
 
 const workTab = document.getElementById('workTab')
 const breakTab = document.getElementById('breakTab')
+const longBreakTab = document.getElementById('longBreakTab')
 const sessionCounterElement = document.getElementById('sessionCounter')
-const tabs = [workTab, breakTab]
+const tabs = [workTab, breakTab, longBreakTab]
+const bgClasses = ['bg-red', 'bg-purple', 'bg-blue']
+const textClasses = ['text-red', 'text-purple', 'text-blue']
 let currentTab = workTab
 workTab.classList.add('chosenTab')
 let sessionCounter = 0
@@ -39,6 +44,11 @@ tabs.forEach(tab => {
                 resetTimer()
                 breakScreen()
                 break
+            case longBreakTab:
+                resetTimer()
+                longBreakScreen()
+                break
+
         }
     })
 })
@@ -55,8 +65,10 @@ function handleClick() {
             case breakTab:
                 startBreak()
                 break
+            case longBreakTab:
+                startLongBreak()
+                break
         }
-
     }
     else {   // pause the timer
         pauseBtn.innerHTML = "START"
@@ -70,10 +82,16 @@ function startWork() {
         if (currentSessionTime == 0) {
             isRunning = false
             unpressButton()
-            currentTab = breakTab
-            breakScreen()
             clearInterval(timer)
             sessionCounterElement.innerHTML = "Sessions Completed - " + (++sessionCounter)
+            if(sessionCounter%4==0) {
+                currentTab = longBreakTab
+                longBreakScreen()
+            }
+            else{
+                currentTab = breakTab
+                breakScreen()
+            }
         }
         else {
             currentSessionTime--
@@ -98,6 +116,22 @@ function startBreak() {
     }, 1000);
 }
 
+function startLongBreak() {
+    timer = setInterval(() => {
+        if (currentLongBreakTime == 0) {
+            isRunning = false
+            currentTab = workTab
+            unpressButton()
+            workScreen()
+            resetTimer()
+        }
+        else {
+            currentLongBreakTime--
+            timerTitle.innerHTML = formatTime(currentLongBreakTime)
+        }
+    }, 1000);
+}
+
 function removeSelectionAll() {
     tabs.forEach(tab => {
         tab.classList.remove('chosenTab')
@@ -112,15 +146,23 @@ function chooseTab(tab) {
 
 function breakScreen() {
     chooseTab(breakTab)
-    redToPurple()
+    changeToPurple()
     period.innerHTML = "Time for a Break!"
     timerTitle.innerHTML = formatTime(currentBreakTime)
     pauseBtn.innerHTML = "START"
 }
 
+function longBreakScreen() {
+    chooseTab(longBreakTab)
+    changeToBlue()
+    period.innerHTML = "Time for a Break!"
+    timerTitle.innerHTML = formatTime(currentLongBreakTime)
+    pauseBtn.innerHTML = "START"
+}
+
 function workScreen() {
     chooseTab(workTab)
-    purpleToRed()
+    changeToRed()
     period.innerHTML = "Get to Work!"
     timerTitle.innerHTML = formatTime(currentSessionTime)
     pauseBtn.innerHTML = "START"
@@ -133,8 +175,9 @@ function resetTimer() {
         pauseBtn.innerHTML = "START"
     }
     clearInterval(timer)
-    currentSessionTime = sessionTime;
-    currentBreakTime = breakTime;
+    currentSessionTime = sessionTime
+    currentBreakTime = breakTime
+    currentLongBreakTime = longBreakTime
     switch (currentTab) {
         case workTab:
             timerTitle.innerHTML = formatTime(currentSessionTime)
@@ -142,21 +185,43 @@ function resetTimer() {
         case breakTab:
             timerTitle.innerHTML = formatTime(currentBreakTime)
             break
+        case longBreakTab:
+            timerTitle.innerHTML = formatTime(currentLongBreakTime)
+            break
     }
 }
 
-function redToPurple() {
-    container.classList.remove('bg-red')
+function changeToPurple() {
+    removeBg()
     container.classList.add('bg-purple')
-    pauseBtn.classList.remove('text-red')
+    removeTextColour()
     pauseBtn.classList.add('text-purple')
 }
 
-function purpleToRed() {
-    container.classList.remove('bg-purple')
+function changeToRed() {
+    removeBg()
     container.classList.add('bg-red')
-    pauseBtn.classList.remove('text-purple')
+    removeTextColour()
     pauseBtn.classList.add('text-red')
+}
+
+function changeToBlue() {
+    removeBg()
+    container.classList.add('bg-blue')
+    removeTextColour()
+    pauseBtn.classList.add('text-blue')
+}
+
+function removeBg() {
+    bgClasses.forEach(colourClass => {
+        container.classList.remove(colourClass)
+    })
+}
+
+function removeTextColour() {
+    textClasses.forEach(colourClass => {
+        pauseBtn.classList.remove(colourClass)
+    })
 }
 
 function formatTime(sec) {

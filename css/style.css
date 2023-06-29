@@ -10,7 +10,8 @@
 
 :root {
     --red: rgb(186, 73, 73);
-    --purple: rgb(144, 73, 186);
+    --purple: rgb(130, 110, 190);
+    --blue: rgb(61, 137, 154);
 }
 
 .container{
@@ -57,12 +58,21 @@
     transition: all 0.2s linear;
 }
 
+.bg-blue{
+    background-color: var(--blue);
+    transition: all 0.2s linear;
+}
+
 .text-red{
     color: var(--red);
 }
 
 .text-purple{
     color: var(--purple);
+}
+
+.text-blue{
+    color: var(--blue);
 }
 
 .timer-container {
@@ -93,6 +103,11 @@
 .btn-not-pressed{
     border: none;
     border-bottom: 4px solid rgb(151, 151, 151);
+}
+
+.heading{
+    margin-top: 15px;
+    width: 40vw;
 }
 
 #sessionCounter{
