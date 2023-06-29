@@ -4,7 +4,6 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    color: white;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -15,8 +14,9 @@
 }
 
 .container{
+    color: white;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -106,8 +106,87 @@
 }
 
 .heading{
+    display: flex;
+    height: fit-content;
     margin-top: 15px;
     width: 40vw;
+    justify-content: space-between;
+}
+
+.fa-solid.fa-gear{
+    padding-right: 5px;
+}
+
+#settings-btn{
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: rgb(255,255,255,0.1);
+    border: transparent;
+    padding: 5px 8px;
+    transition: all 0.2s linear;
+    outline: none;
+}
+
+#settings-btn:hover{
+    background-color: rgb(255,255,255,0.2);
+}
+
+
+#dark-layer{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.hide{
+    display: none !important;
+}
+
+.settings-heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.settings-heading>h3{
+    color: rgb(97, 97, 97);
+}
+
+#settings-menu{
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10%;
+    left: 35%;
+    width: 30vw;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+}
+
+.settings-fields{
+    position: relative;
+    top: 30%;
+}
+
+.settings-fields p{
+    font-size: 1.2rem;
+    margin: 20px 0px;
+    color: rgb(150, 150, 150);
+    font-weight: 600;
+}
+
+.fa-solid.fa-xmark{
+    align-self: flex-end;
+    cursor: pointer;
+    color: rgb(177, 177, 177);
+    transform: scale(1.2);
 }
 
 #sessionCounter{

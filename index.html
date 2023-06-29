@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,19 @@
     <script src="js/script.js" defer></script>
     <script src="https://kit.fontawesome.com/98fdc47a54.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+    <div id="dark-layer" class=""></div>
     <div class="container bg-red" id="container">
         <div class="heading">
-            <h2>EasyPomo | A Pomodoro Timer</h2>
+            <h3>EasyPomo | A Pomodoro Timer</h3>
+            <button id="settings-btn" onclick="openSettings()"><i class="fa-solid fa-gear"></i>Settings</button>
         </div>
         <div class="timer-container">
             <div class="navbar">
                 <ul>
                     <li id="workTab"><a>Work</a></li>
-                    <li id="breakTab"><a>Break</a></li>
+                    <li id="breakTab"><a>Short Break</a></li>
                     <li id="longBreakTab"><a>Long Break</a></li>
                 </ul>
             </div>
@@ -32,5 +36,19 @@
             <div id="sessionCounter">Sessions Completed - 0</div>
         </div>
     </div>
+    <div id="settings-menu" class="hide">
+        <div class="settings-heading">
+            <h3>Settings</h3>
+            <div class="closemark">
+                <i class="fa-solid fa-xmark" onclick="closeSettings()"></i>
+            </div>
+        </div>
+        <div class="settings-fields">
+            <p>Work session</p>
+            <p>Short break</p>
+            <p>Long break</p>
+        </div>
+    </div>
 </body>
+
 </html>

@@ -14,6 +14,7 @@ let currentBreakTime = breakTime
 let currentLongBreakTime = longBreakTime
 let isRunning = false
 const clickSound = new Audio('../sound/click.mp3')
+const notifSound = new Audio('../sound/notification.mp3')
 let timer
 
 const timerTitle = document.getElementById('timer-title')
@@ -29,6 +30,8 @@ const sessionCounterElement = document.getElementById('sessionCounter')
 const tabs = [workTab, breakTab, longBreakTab]
 const bgClasses = ['bg-red', 'bg-purple', 'bg-blue']
 const textClasses = ['text-red', 'text-purple', 'text-blue']
+const settingsMenu = document.getElementById('settings-menu')
+const darkLayer = document.getElementById('dark-layer')
 let currentTab = workTab
 workTab.classList.add('chosenTab')
 let sessionCounter = 0
@@ -80,6 +83,7 @@ function handleClick() {
 function startWork() {
     timer = setInterval(() => {
         if (currentSessionTime == 0) {
+            notifSound.play()
             isRunning = false
             unpressButton()
             clearInterval(timer)
@@ -103,6 +107,7 @@ function startWork() {
 function startBreak() {
     timer = setInterval(() => {
         if (currentBreakTime == 0) {
+            notifSound.play()
             isRunning = false
             currentTab = workTab
             unpressButton()
@@ -119,6 +124,7 @@ function startBreak() {
 function startLongBreak() {
     timer = setInterval(() => {
         if (currentLongBreakTime == 0) {
+            notifSound.play()
             isRunning = false
             currentTab = workTab
             unpressButton()
@@ -189,6 +195,16 @@ function resetTimer() {
             timerTitle.innerHTML = formatTime(currentLongBreakTime)
             break
     }
+}
+
+function openSettings(){    
+    settingsMenu.classList.remove('hide')
+    darkLayer.style.zIndex = 0
+}
+
+function closeSettings(){    
+    settingsMenu.classList.add('hide')
+    darkLayer.style.zIndex = -1
 }
 
 function changeToPurple() {
