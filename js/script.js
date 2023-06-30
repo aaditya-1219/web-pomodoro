@@ -6,9 +6,9 @@
 function minToSec(min) {
     return min * 60
 }
-let sessionTime = minToSec(0.05)
-let breakTime = minToSec(0.05)
-let longBreakTime = minToSec(0.05)
+let sessionTime = minToSec(25)
+let breakTime = minToSec(5)
+let longBreakTime = minToSec(15)
 let currentSessionTime = sessionTime
 let currentBreakTime = breakTime
 let currentLongBreakTime = longBreakTime
@@ -35,6 +35,30 @@ const darkLayer = document.getElementById('dark-layer')
 let currentTab = workTab
 workTab.classList.add('chosenTab')
 let sessionCounter = 0
+const workSessionField = document.getElementById('workSessionField')
+workSessionField.placeholder = sessionTime/60
+const shortBreakField = document.getElementById('shortBreakField')
+shortBreakField.placeholder = breakTime/60
+const longBreakField = document.getElementById('longBreakField')
+longBreakField.placeholder = longBreakTime/60
+
+function getSessionTime() {
+    sessionTime = minToSec(workSessionField.value)    // sessionTime stores in seconds
+    currentSessionTime = sessionTime
+    timerTitle.innerHTML = formatTime(currentSessionTime)
+}
+
+function getBreakTime(){
+    breakTime = minToSec(shortBreakField.value)    // breakTime stores in seconds
+    currentBreakTime = breakTime
+    timerTitle.innerHTML = formatTime(currentBreakTime)
+}
+
+function getLongBreakTime(){
+    longBreakTime = minToSec(longBreakField.value)    // longBreakTime stores in seconds
+    currentLongBreakTime = longBreakTime
+    timerTitle.innerHTML = formatTime(currentLongBreakTime)
+}
 
 tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
@@ -205,6 +229,9 @@ function openSettings(){
 function closeSettings(){    
     settingsMenu.classList.add('hide')
     darkLayer.style.zIndex = -1
+}
+
+function changeTime(){
 }
 
 function changeToPurple() {

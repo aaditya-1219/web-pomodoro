@@ -44,9 +44,18 @@
             </div>
         </div>
         <div class="settings-fields">
-            <p>Work session</p>
-            <p>Short break</p>
-            <p>Long break</p>
+            <div class="input-field">
+                Work Session
+                <input type="number" name="workSession" min="0" max="120" id="workSessionField" oninput="getSessionTime()">
+            </div>
+            <div class="input-field">
+                Short Break
+                <input type="number" name="shortBreak" min="0" max="120" id="shortBreakField" oninput="getBreakTime()">
+            </div>
+            <div class="input-field">
+                Long Break
+                <input type="number" name="longBreak" min="0" max="120" id="longBreakField" oninput="getLongBreakTime()">
+            </div>
         </div>
     </div>
 </body>
