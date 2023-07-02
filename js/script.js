@@ -2,7 +2,6 @@
 // work
 // shortBreak
 // longBreak - after every 4 work sessions
-
 function minToSec(min) {
     return min * 60
 }
@@ -12,17 +11,13 @@ let longBreakTime = minToSec(15)
 let currentSessionTime = sessionTime
 let currentBreakTime = breakTime
 let currentLongBreakTime = longBreakTime
-let isRunning = false
+let timer
 const clickSound = new Audio('../sound/click.mp3')
 const notifSound = new Audio('../sound/notification.mp3')
-let timer
-
 const timerTitle = document.getElementById('timer-title')
-timerTitle.innerHTML = formatTime(sessionTime)
 const pauseBtn = document.getElementById('pause')
 const container = document.getElementById('container')
 const period = document.getElementById('period')
-
 const workTab = document.getElementById('workTab')
 const breakTab = document.getElementById('breakTab')
 const longBreakTab = document.getElementById('longBreakTab')
@@ -36,28 +31,56 @@ let currentTab = workTab
 workTab.classList.add('chosenTab')
 let sessionCounter = 0
 const workSessionField = document.getElementById('workSessionField')
-workSessionField.placeholder = sessionTime/60
 const shortBreakField = document.getElementById('shortBreakField')
-shortBreakField.placeholder = breakTime/60
 const longBreakField = document.getElementById('longBreakField')
-longBreakField.placeholder = longBreakTime/60
+let isRunning = false
 
-function getSessionTime() {
+let settingsObj = {
+    session: minToSec(25),
+    break: minToSec(5),
+    longBreak: minToSec(15)
+}
+retrieveData()
+timerTitle.innerHTML = formatTime(sessionTime)
+workSessionField.value = sessionTime / 60
+shortBreakField.value = breakTime / 60
+longBreakField.value = longBreakTime / 60
+
+function saveData() {
+    localStorage.setItem("pomodoroSettings", JSON.stringify(settingsObj))
+}
+
+function retrieveData() {
+    if(localStorage.getItem("pomodoroSettings")){
+        settingsObj = JSON.parse(localStorage.getItem("pomodoroSettings"))
+        sessionTime = settingsObj.session
+        breakTime = settingsObj.break
+        longBreakTime = settingsObj.longBreak
+    }
+}
+
+function changeTime() {
     sessionTime = minToSec(workSessionField.value)    // sessionTime stores in seconds
     currentSessionTime = sessionTime
-    timerTitle.innerHTML = formatTime(currentSessionTime)
-}
-
-function getBreakTime(){
+    settingsObj.session = sessionTime
     breakTime = minToSec(shortBreakField.value)    // breakTime stores in seconds
     currentBreakTime = breakTime
-    timerTitle.innerHTML = formatTime(currentBreakTime)
-}
-
-function getLongBreakTime(){
+    settingsObj.break = breakTime
     longBreakTime = minToSec(longBreakField.value)    // longBreakTime stores in seconds
     currentLongBreakTime = longBreakTime
-    timerTitle.innerHTML = formatTime(currentLongBreakTime)
+    settingsObj.longBreak = longBreakTime
+    saveData()
+    switch (currentTab) {
+        case workTab:
+            workScreen()
+            break
+        case breakTab:
+            breakScreen()
+            break
+        case longBreakTab:
+            longBreakScreen()
+            break
+    }
 }
 
 tabs.forEach(tab => {
@@ -75,7 +98,6 @@ tabs.forEach(tab => {
                 resetTimer()
                 longBreakScreen()
                 break
-
         }
     })
 })
@@ -112,11 +134,11 @@ function startWork() {
             unpressButton()
             clearInterval(timer)
             sessionCounterElement.innerHTML = "Sessions Completed - " + (++sessionCounter)
-            if(sessionCounter%4==0) {
+            if (sessionCounter % 4 == 0) {
                 currentTab = longBreakTab
                 longBreakScreen()
             }
-            else{
+            else {
                 currentTab = breakTab
                 breakScreen()
             }
@@ -221,17 +243,14 @@ function resetTimer() {
     }
 }
 
-function openSettings(){    
+function openSettings() {
     settingsMenu.classList.remove('hide')
     darkLayer.style.zIndex = 0
 }
 
-function closeSettings(){    
+function closeSettings() {
     settingsMenu.classList.add('hide')
     darkLayer.style.zIndex = -1
-}
-
-function changeTime(){
 }
 
 function changeToPurple() {
