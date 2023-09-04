@@ -1,63 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Timer | Pomodoro App</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/script.js" defer></script>
-    <script src="https://kit.fontawesome.com/98fdc47a54.js" crossorigin="anonymous"></script>
-</head>
+    <script
+      src="https://kit.fontawesome.com/98fdc47a54.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
+  <body>
     <div id="dark-layer" class=""></div>
     <div class="container bg-red" id="container">
+      <div id="inner-container">
         <div class="heading">
-            <h3>EasyPomo | A Pomodoro Timer</h3>
-            <button id="settings-btn" onclick="openSettings()"><i class="fa-solid fa-gear"></i>Settings</button>
+          <h3>EasyPomo | A Pomodoro Timer</h3>
+          <button id="settings-btn" onclick="openSettings()">
+            <i class="fa-solid fa-gear"></i>Settings
+          </button>
         </div>
         <div class="timer-container">
-            <div class="navbar">
-                <ul>
-                    <li id="workTab"><a>Work</a></li>
-                    <li id="breakTab"><a>Short Break</a></li>
-                    <li id="longBreakTab"><a>Long Break</a></li>
-                </ul>
-            </div>
-            <h2 id="timer-title">
-                00:00
-            </h2>
-            <div class="action-buttons">
-                <button id="pause" class="btn-not-pressed text-red" onclick="handleClick()">START</button>
-                <i class="fa-solid fa-rotate" id="reset" onclick="resetTimer()"></i>
-            </div>
-            <div id="period">Get to Work!</div>
-            <div id="sessionCounter">Sessions Completed - 0</div>
+          <div class="navbar">
+            <ul>
+              <li id="workTab"><a>Work</a></li>
+              <li id="breakTab"><a>Short Break</a></li>
+              <li id="longBreakTab"><a>Long Break</a></li>
+            </ul>
+          </div>
+          <h2 id="timer-title">00:00</h2>
+          <div class="action-buttons">
+            <button
+              id="pause"
+              class="btn-not-pressed text-red"
+              onclick="handleClick()"
+            >
+              START
+            </button>
+            <i class="fa-solid fa-rotate" id="reset" onclick="resetTimer()"></i>
+          </div>
+          <div id="period">Get to Work!</div>
+          <div id="sessionCounter">Sessions Completed - 0</div>
         </div>
+      </div>
     </div>
     <div id="settings-menu" class="hide">
-        <div class="settings-heading">
-            <h3>Settings</h3>
-            <div class="closemark">
-                <i class="fa-solid fa-xmark" onclick="closeSettings()"></i>
-            </div>
+      <div class="settings-heading">
+        <h3>Settings</h3>
+        <div class="closemark">
+          <i class="fa-solid fa-xmark" onclick="closeSettings()"></i>
         </div>
-        <div class="settings-fields">
-            <div class="input-field">
-                Work Session
-                <input type="number" name="workSession" min="0" max="120" id="workSessionField" oninput="changeTime()">
-            </div>
-            <div class="input-field">
-                Short Break
-                <input type="number" name="shortBreak" min="0" max="120" id="shortBreakField" oninput="changeTime()">
-            </div>
-            <div class="input-field">
-                Long Break
-                <input type="number" name="longBreak" min="0" max="120" id="longBreakField" oninput="changeTime()">
-            </div>
+      </div>
+      <div class="settings-fields">
+        <div class="input-field">
+          Work Session
+          <input
+            type="number"
+            name="workSession"
+            min="0"
+            max="120"
+            id="workSessionField"
+            oninput="changeTime()"
+          />
         </div>
+        <div class="input-field">
+          Short Break
+          <input
+            type="number"
+            name="shortBreak"
+            min="0"
+            max="120"
+            id="shortBreakField"
+            oninput="changeTime()"
+          />
+        </div>
+        <div class="input-field">
+          Long Break
+          <input
+            type="number"
+            name="longBreak"
+            min="0"
+            max="120"
+            id="longBreakField"
+            oninput="changeTime()"
+          />
+        </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
