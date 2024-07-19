@@ -2,9 +2,13 @@
 
 Link: https://easypomo.netlify.app/
 
-Description: A pomodoro timer web application made using HTML, CSS and JavaScript. It is based on the [Pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique).
+#### Description:
 
-Pomodoro technique: The Pomodoro Technique is a time management that involves breaking work into intervals, typically 25 minutes in length, called "pomodoros", separated by short breaks. After completing four pomodoros, a longer break is taken. This technique helps improve focus and productivity by encouraging sustained work periods and regular rest.
+A pomodoro timer web application made using HTML, CSS and JavaScript. It is based on the [Pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique).
+
+#### Pomodoro technique:
+
+The Pomodoro Technique is a time management that involves breaking work into intervals, typically 25 minutes in length, called "pomodoros", separated by short breaks. After completing four pomodoros, a longer break is taken. This technique helps improve focus and productivity by encouraging sustained work periods and regular rest.
 
 ## Tech stack
 * HTML
